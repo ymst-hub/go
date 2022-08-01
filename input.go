@@ -1,9 +1,9 @@
 package main
 
 import (
-	"bufio"//標準入力取得部分
-	"fmt"//出力
-	"os"//標準入力部分
+	"bufio" //標準入力取得部分
+	"fmt"   //出力
+	"os"    //標準入力部分
 )
 
 func main(){

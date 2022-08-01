@@ -1,6 +1,7 @@
 package main
+
 //最初に処理する関数名
-import(
+import (
 	"fmt"
 	//パッケージ
 )
