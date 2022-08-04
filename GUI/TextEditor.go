@@ -1,5 +1,7 @@
 package main
 
+
+//go build -ldflags="-H windowsgui" TextEditor.go
 import "fyne.io/fyne/v2/app"
 import "fyne.io/fyne/v2/widget"
 import "fyne.io/fyne/v2/container"
