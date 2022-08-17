@@ -40,9 +40,10 @@ func main(){
 		panic(er)
 	}
 
-	for rs.Next(){
+	for rs.Next(){//1行ずつ
 		var md Mydata
 		er := rs.Scan(&md.ID , &md.Name , &md.Mail , &md.age)
+		//Scanでレコード情報を取り出すことができる
 		if er != nil {
 			panic(er)
 		}
