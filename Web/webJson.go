@@ -3,9 +3,18 @@ package main
 import(
 	"net/http"
 	"io/ioutil"
-	"fmt"
 	"encoding/json"
 )
+
+//Mydataを設定
+type Mydata struct{
+	Name string
+	Mail string
+	Tel string
+}
+func (m *Mydata) Str() string{
+	return "<\"" + m.Name +"\" " + m.Mail + ","+ m.Tel + ">"
+}
 
 func main(){
 	p := "https://tuyano-dummy-data.firebaseio.com/mydata.json"
@@ -20,14 +29,19 @@ func main(){
 		panic(er)
 	}
 
-	var data []interface{}
-	er = json.Unmarshal(s,&data)
+	var items []Mydata
+	er = json.Unmarshal(s,&items)//取り出す
 	if er != nil{
 		panic(er)
 	}
 
+	for i,im := range items{
+		println(i,im.Str())
+	}
+	/*
 	for i, im := range data{
 		m := im.(map[string]interface{})
 		fmt.Println(i,m["name"].(string),m["mail"].(string),m["tel"].(string))
 	}
+	*/
 }
