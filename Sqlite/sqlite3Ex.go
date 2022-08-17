@@ -39,10 +39,10 @@ func main(){
 	if er != nil{
 		panic(er)
 	}
-	
+
 	for rs.Next(){
 		var md Mydata
-		er := rs.Scan(&md.ID,&md.Name,&md.Mail,&md.age)
+		er := rs.Scan(&md.ID , &md.Name , &md.Mail , &md.age)
 		if er != nil {
 			panic(er)
 		}
