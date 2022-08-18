@@ -26,55 +26,47 @@ func (m *Mydata) Str() string{
 	return "<\""+ strconv.Itoa(m.ID) + ":" + m.Name + "\" "+m.Mail + "," + strconv.Itoa(m.age) +">"
 }
 
-var qry string = "select * from mydata where id = ?"
-//like検索 where name like ?
-//qry,"%"+s+"%"
-
-//and検索、or検索も可能
-
 func main(){
 	con,er := sql.Open("sqlite3","data.sqlite3")
-	if er != nil{
+	if er != nil {
 		panic(er)
 	}
 	defer con.Close()
 
-	for true {
-		//begin
-		s := input("id")
-		if s == "" {
-			break
-		}
-		n,er := strconv.Atoi(s)
-		if er != nil{
-			panic(er)
-		}
-		//rs,er := con.Query(qry,n)//nを追加できる
-		rs := con.QueryRow(qry,n)
-		/*
-		queryRowは１つしか返さない
-		if er != nil{
-			panic(er)
-		}
-		
-		for rs.Next(){
-			var md Mydata
-			er := rs.Scan(&md.ID , &md.Name , &md.Mail , &md.age)
-			if er != nil{
-				panic(er)
-			}
-			fmt.Println(md.Str())
-		}
-		*/
-		var md Mydata
-		er2 := rs.Scan(&md.ID , &md.Name , &md.Mail , &md.age)
-		if er2 != nil{
-			panic(er2)
-		}
-		fmt.Println(md.Str())
+	nm := input("name")
+	ml := input("mail")
+	age := input("age")
+	ag,_ := strconv.Atoi(age)
+	qry := "insert into mydata (name,mail,age) values(?,?,?)"
+	con.Exec(qry,nm,ml,ag)
+	showRecord(con)
+	
+}
 
+func showRecord(con *sql.DB){
+	qry := "select * from mydata"
+	rs,_ := con.Query(qry)
+	for rs.Next(){
+		fmt.Println(MydatafmRws(rs).Str())
 	}
-	fmt.Println("***end***")
+}
+
+func MydatafmRws(rs *sql.Rows) *Mydata{
+	var md Mydata
+	er := rs.Scan(&md.ID,&md.Name,&md.Mail,&md.age)
+	if er != nil{
+		panic(er)
+	}
+	return &md
+}
+
+func MydatafmRw(rs *sql.Row) *Mydata{
+	var md Mydata
+	er := rs.Scan(&md.ID,&md.Name,&md.Mail,&md.age)
+	if er != nil {
+		panic(er)
+	}
+	return &md
 }
 
 func input(msg string)string{
