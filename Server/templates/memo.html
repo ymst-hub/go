@@ -1,0 +1,20 @@
+<!--
+        <h1 class="display-4 mb-4">{{.Title}}</h1>
+        {{if .Flg}}
+        <p>{{.Message}}</p>
+            <ul class="list-group">
+            {{range $index,$element := .Items}}
+            <li class="list-group-item">{{$index}}:{{$element}}</li>
+            {{end}}
+            </ul>
+        {{else}}
+            <p>{{.JMessage}}</p>
+        {{end}}
+            {{with .Message2}}
+            <p>message2あるよ</p>
+            {{else}}
+            <p>message2ないよ</p>
+            {{end}}
+        <h1 class="display-4 mb-4">Hello</h1>
+        <p>this is Hello Page</p> 
+        -->
