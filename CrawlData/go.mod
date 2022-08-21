@@ -1,4 +1,4 @@
-module module
+module modu
 
 go 1.18
 
